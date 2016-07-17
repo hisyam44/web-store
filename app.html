@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>app</title>
+</head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<style type="text/css">
+	.main{
+		width: 50%;
+		margin: 0 auto;
+	}
+	.input{
+		display: block;
+		width: 100%;
+	}
+	.input textarea{
+		display: block;
+		width: 100%;
+	}
+	.output{
+		display: block;
+		width: 100%;
+	}
+	.button button{
+		margin: 5px 0px;
+		padding: 10px 10px;
+		background: #fff;
+		border: 1px solid #000;
+		color: #000;
+	}
+</style>
+<body>
+	<div class="main">
+		<div id="output">
+		</div>
+		<div class="input">
+			<textarea rows="5"></textarea>
+		</div>
+		<div class="button">
+			<button class="button-display">Hide</button>
+			<button class="button-post">Post</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		/*$('.button-post').click(function (){
+			var content = $('.input textarea').val();
+			document.getElementById('output').innerHTML = content;
+			console.log("oke");
+		});*/
+		$('.input textarea').keyup(function (){
+			var content = $(this).val();
+			document.getElementById('output').innerHTML = content;
+		});
+		var displayed = 1;
+		$('.button-display').click(function(){
+			if(displayed == 1){
+				$('.input').hide('slow');
+				$('.button-post').hide('slow');
+				displayed = 0;
+				console.log("hide");
+				$(this).text('Show');
+			}else{
+				$('.input').show('slow');
+				$('.button-post').show('slow');
+				displayed = 1;
+				console.log("show")
+				$(this).text('Hide');
+			}
+		});
+	</script>
+</body>
+</html>

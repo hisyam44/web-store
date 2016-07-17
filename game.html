@@ -1,0 +1,105 @@
+<html>
+<head>
+	<title>game</title>
+</head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<style type="text/css">
+*{
+	font-family: helvetica;
+}
+.row:after{
+	content: "";
+	clear: both;
+	display: block;
+}
+.container{
+	width: 50%;
+	float: left;
+	padding: 20px;
+	border: 1px solid #aaa;
+}
+.main{
+	width: 100%;
+	height: 80%;
+}
+.main div{
+	margin:2px;
+	float: left;
+}
+.input{
+	top:90%;
+	width: 100%;
+	padding: 10px 5px;
+	border: 1px solid #eee;
+}
+.side{
+	width: 20%;
+	margin: 0px 10px;
+	padding: 20px;
+	float: left;
+	border: 1px solid #aaa;
+}
+</style>
+<body>
+	<div class="row">
+	<div class="side">
+		<div class="words">0 words</div>
+		<div class="time"></div>
+		<div class="rate"></div>
+	</div>
+	<div class="container">
+		<div class="main"></div>
+		<input class="input" placeholder="Type text on top here ...">
+	</div>
+	</div>
+	<script type="text/javascript">
+	$( document ).ready(function(){
+		$('input').focus();
+		var words = 0;
+		var time = 0;
+		$('.input').keyup(function (){
+			var first = $('.main :first-child').html();
+			var input = $(this).val();
+			console.log(first);
+			console.log(input);
+			if(input == first){
+				$('.main :first-child').remove();
+				$('.input').val('');
+				words++;
+				$('.side .words').text(words+" words");
+			}
+		});
+		setInterval(function (){
+			var main = $('.main');
+			var text = main.html();
+			var new_text = word(random(2,4));
+			main.html(text+=new_text);
+			time++;
+			$('.side .time').text(time+" seconds");
+			$('.side .rate').text((words/time)*60+" words/minute");
+		},1000);
+		function random(min,max){
+			var random = Math.round(Math.random()*(max-min)+min);
+			return random;
+		}
+		function vokal(){
+			var vokal = new Array();
+			vokal = ['a','i','u','e','o'];
+			return vokal[random(0,vokal.length-1)];
+		}
+		function konsonan(){
+			var konsonan = new Array();
+			konsonan = ['q','w','r','t','y','p','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m'];
+			return konsonan[random(0,konsonan.length-1)];
+		}
+		function word(num){
+			var word = "";
+			for(var i = 0;i<num;i++){
+				word += konsonan()+vokal();
+			}
+			return "<div>"+word+"</div>";
+		}
+	});
+	</script>
+</body>
+</html>

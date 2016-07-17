@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>matrix</title>
+</head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<style type="text/css">
+.node{
+}
+body{
+	background: #000;
+}
+.container{
+	text-align:center;
+	color:#0a0;
+	float:left;
+	width: 17px;
+}
+.box{
+	height: 100%;
+	overflow: hidden;
+}
+</style>
+<body>
+	<div class="box">
+	
+	</div>
+	<script type="text/javascript">
+		for(var i=0;i<75;i++){
+			$('.box').append('<div class="container" id="'+i+'"><div class="node">0</div></div>');
+		}
+		setInterval(function (){
+			var i = randomNumber(0,75);
+			var rand = ""+acak();
+			var node = $('#'+i+' .node');
+			node.html(rand);
+			$('<div class="text">'+rand+'</div>').insertBefore(node);
+		},1);
+		setInterval(function (){
+			var i = randomNumber(0,75);
+			$('#'+i+' .text').fadeOut("slow",function (){
+				$('#'+i+' .text').remove();
+			});
+			console.log("dsk");
+		},500);
+		function acak(){
+			var characters = ['1','2','3','4','5','6','7','8','9','0','!','@','#','$','%','&','^','*','?','(',')','_','+','=','-','~','/','<','>','}','{',']','[',':',':','.',',','&nbsp;','q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+			var rand = characters[randomNumber(0,characters.length-1)];
+			return " "+rand+" ";
+		}
+		function randomNumber(min,max){
+			var i = Math.round(Math.random()*(max-min)+min);
+			return i;
+		}
+	</script>
+</body>
+</html>  
